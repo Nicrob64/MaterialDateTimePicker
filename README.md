@@ -12,9 +12,9 @@ Support for Android 4.0 and up.
 
 Feel free to fork or issue pull requests on github. Issues can be reported on the github issue tracker.
 
-Date Picker | Time Picker
----- | ----
-![Date Picker](https://raw.github.com/wdullaer/MaterialDateTimePicker/gh-pages/images/date_picker.png) | ![Time Picker](https://raw.github.com/wdullaer/MaterialDateTimePicker/gh-pages/images/time_picker.png)
+Date Picker | Time Picker | (No Year)
+---- | ---- | ----
+![Date Picker](https://raw.github.com/wdullaer/MaterialDateTimePicker/gh-pages/images/date_picker.png) | ![Time Picker](https://raw.github.com/wdullaer/MaterialDateTimePicker/gh-pages/images/time_picker.png) | ![Date Picker No Year](https://raw.github.com/nicrob64/MaterialDateTimePicker/master/ss_no_year.png)
 
 ## Changes from `wdullaer/MaterialDateTimePicker`
 - Changed to support library 
