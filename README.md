@@ -16,6 +16,10 @@ Date Picker | Time Picker
 ---- | ----
 ![Date Picker](https://raw.github.com/wdullaer/MaterialDateTimePicker/gh-pages/images/date_picker.png) | ![Time Picker](https://raw.github.com/wdullaer/MaterialDateTimePicker/gh-pages/images/time_picker.png)
 
+## Changes from `wdullaer/MaterialDateTimePicker`
+- Changed to support library 
+- Added support for disabling year picker (see [Additional Options](#additional-options))
+
 
 ## Table of Contents
 1. [Setup](#setup)
@@ -33,7 +37,7 @@ Date Picker | Time Picker
 The easiest way to add the Material DateTime Picker library to your project is by adding it as a dependency to your `build.gradle`
 ```java
 dependencies {
-  compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+  compile 'com.github.Nicrob64:MaterialDateTimePicker:2.5.1'
 }
 ```
 
@@ -170,19 +174,8 @@ If set to `true` will dismiss the picker when the user selects a date. This defa
 * `TimepickerDialog` `enableSeconds(boolean enableSconds)` and `enableMinutes(boolean enableMinutes)`
 Allows you to enable or disable a seconds and minutes picker ont he `TimepickerDialog`. Enabling the seconds picker, implies enabling the minutes picker. Disabling the minute picker will disable the seconds picker. The last applied setting will be used. By default `enableSeconds = false` and `enableMinutes = true`.
 
-## FAQ
-
-### Why not use `SupportDialogFragment`?
-Not using the support library versions has been a well considered choice, based on the following considerations:
-
-* Less than 5% of the devices using the android market do not support native `Fragments`, a number which will decrease even further going forward.
-* Even if you use `SupportFragments` in your application, you can still use the normal `FragmentManager`
-
-This means that in the current setup everyone can use the library: people using the support library and people not using the support library.
-
-Finally changing to `SupportDialogFragment` now will break the API for all the people using this library.
-
-If you do really need `SupportDialogFragment`, you should fork the library. It involves changing all of 2 lines of code, so it should be easy enough to keep it up to date with the upstream.
+* `DatePickerDialog` `shouldShowYear(boolean showYear)` `default: true`
+If set to `false` this will hide the year selection on the `DatePickerDialog`. This will also hide the year label on the months and set the year for each month to be year `2000` (as it is a leap year). This is useful if you want a date, without being concerned about the year the date is in.
 
 ### Why does the `DatePickerDialog` return the selected month -1?
 In the java `Calendar` class months use 0 based indexing: January is month 0, December is month 11. This convention is widely used in the java world, for example the native Android DatePicker.
@@ -222,7 +215,7 @@ public void onResume() {
 
 
 ## License
-    Copyright (c) 2015 Wouter Dullaert
+    Copyright (c) 2016 Nic Robertson
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
