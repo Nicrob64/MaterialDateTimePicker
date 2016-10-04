@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
     private CheckBox limitDates;
     private CheckBox disableDates;
     private CheckBox highlightDates;
+	private CheckBox showYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements
         limitDates = (CheckBox) findViewById(R.id.limit_dates);
         disableDates = (CheckBox) findViewById(R.id.disable_dates);
         highlightDates = (CheckBox) findViewById(R.id.highlight_dates);
+		showYear = (CheckBox) findViewById(R.id.show_year);
 
         // Check if picker mode is specified in Style.xml
         modeDarkTime.setChecked(Utils.isDarkTheme(this, modeDarkTime.isChecked()));
@@ -164,6 +166,9 @@ public class MainActivity extends AppCompatActivity implements
                     }
                     dpd.setDisabledDays(dates);
                 }
+				if(!showYear.isChecked()){
+					dpd.shouldShowYear(false);
+				}
                 dpd.show(getSupportFragmentManager(), "Datepickerdialog");
             }
         });

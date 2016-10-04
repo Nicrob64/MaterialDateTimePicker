@@ -43,6 +43,8 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
     protected static int WEEK_7_OVERHANG_HEIGHT = 7;
     protected static final int MONTHS_IN_YEAR = 12;
 
+	private boolean mShowYear = true;
+
     /**
      * A convenience class to represent a specific date.
      */
@@ -112,6 +114,10 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
         init();
         setSelectedDay(mController.getSelectedDay());
     }
+
+	private void setShowYear(boolean showYear){
+		mShowYear = showYear;
+	}
 
     /**
      * Updates the selected day and related parameters.
@@ -185,7 +191,7 @@ public abstract class MonthAdapter extends BaseAdapter implements OnDayClickList
         drawingParams.clear();
 
         final int month = (position + mController.getStartDate().get(Calendar.MONTH)) % MONTHS_IN_YEAR;
-        final int year = (position + mController.getStartDate().get(Calendar.MONTH)) / MONTHS_IN_YEAR + mController.getMinYear();
+        final int year = mShowYear ? (position + mController.getStartDate().get(Calendar.MONTH)) / MONTHS_IN_YEAR + mController.getMinYear() : -1;
 
         int selectedDay = -1;
         if (isSelectedDayInMonth(year, month)) {

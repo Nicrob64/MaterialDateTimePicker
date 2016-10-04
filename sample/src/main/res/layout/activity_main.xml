@@ -160,5 +160,12 @@
             android:text="@string/highlight_dates"
             android:checked="false"/>
 
+        <CheckBox
+            android:id="@+id/show_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_year"
+            android:checked="false"/>
+
     </LinearLayout>
 </ScrollView>

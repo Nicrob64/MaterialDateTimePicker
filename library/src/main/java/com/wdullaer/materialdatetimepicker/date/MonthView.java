@@ -188,6 +188,7 @@ public abstract class MonthView extends View {
     protected int mDisabledDayTextColor;
     protected int mMonthTitleColor;
 
+
     public MonthView(Context context) {
         this(context, null, null);
     }
@@ -364,6 +365,10 @@ public abstract class MonthView extends View {
         mMonth = params.get(VIEW_PARAMS_MONTH);
         mYear = params.get(VIEW_PARAMS_YEAR);
 
+		if(!mController.shouldShowYear()){
+			mYear = 2000;
+		}
+
         // Figure out what day today is
         //final Time today = new Time(Time.getCurrentTimezone());
         //today.setToNow();
@@ -450,11 +455,13 @@ public abstract class MonthView extends View {
     @NonNull
     private String getMonthAndYearString() {
         Locale locale = Locale.getDefault();
-        String pattern = "MMMM yyyy";
+        String pattern = mController.shouldShowYear() ? "MMMM yyyy" : "MMMM";
 
-        if(Build.VERSION.SDK_INT < 18) pattern = getContext().getResources().getString(R.string.mdtp_date_v1_monthyear);
-        else pattern = DateFormat.getBestDateTimePattern(locale, pattern);
-
+        if(Build.VERSION.SDK_INT < 18) {
+			//pattern = getContext().getResources().getString(R.string.mdtp_date_v1_monthyear);
+		} else {
+			pattern = DateFormat.getBestDateTimePattern(locale, pattern);
+		}
         SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
         formatter.applyLocalizedPattern(pattern);
         mStringBuilder.setLength(0);

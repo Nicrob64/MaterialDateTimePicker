@@ -150,6 +150,8 @@ public class DatePickerDialog extends DialogFragment implements
     private String mYearPickerDescription;
     private String mSelectYear;
 
+	private boolean mShouldShowYear = true;
+
     /**
      * The callback used to indicate the user is done filling in the date.
      */
@@ -198,6 +200,13 @@ public class DatePickerDialog extends DialogFragment implements
         mCalendar.set(Calendar.MONTH, monthOfYear);
         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
     }
+
+	public void shouldShowYear(boolean showYear){
+		mShouldShowYear = showYear;
+		if(mYearView != null){
+			mYearView.setVisibility(showYear ? View.VISIBLE : View.GONE);
+		}
+	}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -267,6 +276,7 @@ public class DatePickerDialog extends DialogFragment implements
         mSelectedDayTextView = (TextView) view.findViewById(R.id.date_picker_day);
         mYearView = (TextView) view.findViewById(R.id.date_picker_year);
         mYearView.setOnClickListener(this);
+		mYearView.setVisibility(mShouldShowYear ? View.VISIBLE : View.GONE);
 
         int listPosition = -1;
         int listPositionOffset = 0;
@@ -1056,7 +1066,12 @@ public class DatePickerDialog extends DialogFragment implements
         if(mVibrate) mHapticFeedbackController.tryVibrate();
     }
 
-    public void notifyOnDateListener() {
+	@Override
+	public boolean shouldShowYear() {
+		return mShouldShowYear;
+	}
+
+	public void notifyOnDateListener() {
         if (mCallBack != null) {
             mCallBack.onDateSet(DatePickerDialog.this, mCalendar.get(Calendar.YEAR),
                     mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
